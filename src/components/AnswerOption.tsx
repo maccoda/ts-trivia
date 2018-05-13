@@ -7,10 +7,6 @@ export interface AnswerOptionProps {
   handleChange(event: any): void;
 }
 
-interface AnswerOptionState {
-  isChecked: boolean;
-}
-
 export default class AnswerOption extends React.Component<
   AnswerOptionProps,
   any
@@ -18,7 +14,6 @@ export default class AnswerOption extends React.Component<
   constructor(props) {
     super(props);
     const checked = props.name == AnswerValue[props.checked];
-    this.state = { isChecked: checked };
   }
   render() {
     return (

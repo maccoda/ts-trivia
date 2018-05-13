@@ -32,7 +32,6 @@ export default class AnswerTable extends React.Component<
   handleSubmit(event: any) {
     event.preventDefault();
     if (this.state.correctAnswer == this.state.selected) {
-      console.log('The answer was correct!');
       this.setState({ responseText: 'That was correct!' });
       this.props.correctCallback();
     } else {

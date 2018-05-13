@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "axios": "^0.18.0",
     "mobx": "^3.2.2",
     "mobx-react": "^4.2.2",
     "react": "^15.6.2",
@@ -18,12 +19,14 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
+    "coverage": "yarn test --coverage --collectCoverageFrom=src/*/**/*.ts*",
     "eject": "react-app-rewired eject"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.10",
     "@types/jest": "^22.2.3",
     "awesome-typescript-loader": "^5.0.0",
+    "axios-mock-adapter": "^1.15.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "jest": "^20.0.4",
@@ -36,7 +39,18 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testMatch": ["**/__tests__/**/*.ts?(x)", "**/?(*.)(spec|test).ts?(x)"],
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "mapCoverage": true
   }
 }

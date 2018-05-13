@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Question from './Question';
-import TriviaApi from '../TriviaApi';
+import TriviaApi from '../service/TriviaApi';
 import QuestionModel from '../model/QuestionModel';
 
 export interface AppProps {
@@ -29,15 +29,12 @@ export default class App extends React.Component<AppProps, AppState> {
 
   render(): JSX.Element {
     if (this.state == null) {
-      console.log('Loading...');
-
       return (
         <div className="container">
           <div className="loader" />;
         </div>
       );
     }
-    console.log(this.state.questions);
     return (
       <div className="container">
         <h1>{this.props.title}</h1>
