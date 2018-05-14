@@ -6,7 +6,7 @@ environment of tests and state management as well.
 
 ## TODO
 
-- [ ] Add some more tests!
+- [x] ~~Add some more tests!~~
 - [ ] Change some styling when the answer is correct
 - [ ] Manage when all 10 questions have been answered
 - [ ] Count and show how many answers were correct

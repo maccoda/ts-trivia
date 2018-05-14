@@ -2,6 +2,7 @@ import * as React from 'react';
 import Question from './Question';
 import TriviaApi from '../service/TriviaApi';
 import QuestionModel from '../model/QuestionModel';
+import HtmlCodeConverter from '../service/HtmlCodeConverter';
 
 export interface AppProps {
   title: string;
@@ -35,20 +36,22 @@ export default class App extends React.Component<AppProps, AppState> {
         </div>
       );
     }
+    const currQuestion = this.state.questions[this.state.currentIndex];
+    const text = HtmlCodeConverter.convertFromHtml(currQuestion.question);
+    const correct = HtmlCodeConverter.convertFromHtml(
+      currQuestion.correct_answer
+    );
+    const incorrect = currQuestion.incorrect_answers.map(x =>
+      HtmlCodeConverter.convertFromHtml(x)
+    );
     return (
       <div className="container">
         <h1>{this.props.title}</h1>
         <div className="question">
           <Question
-            questionText={
-              this.state.questions[this.state.currentIndex].question
-            }
-            correctOption={
-              this.state.questions[this.state.currentIndex].correct_answer
-            }
-            incorrectOptions={
-              this.state.questions[this.state.currentIndex].incorrect_answers
-            }
+            questionText={text}
+            correctOption={correct}
+            incorrectOptions={incorrect}
             correctCallback={this.next}
           />
         </div>

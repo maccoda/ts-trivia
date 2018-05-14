@@ -15,6 +15,7 @@ describe('Basic application testing', async () => {
   beforeEach(() => {
     const question = new QuestionModel();
     question.question = 'aaa';
+    question.incorrect_answers = ['bad', 'worse'];
     questions = [question, question];
     const promise = Promise.resolve(questions);
     const api = jest.spyOn(TriviaApi, 'get').mockReturnValue(promise);
