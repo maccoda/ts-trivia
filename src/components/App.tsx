@@ -32,7 +32,7 @@ export default class App extends React.Component<AppProps, AppState> {
     if (this.state == null) {
       return (
         <div className="container">
-          <div className="loader" />;
+          <div className="loader" />
         </div>
       );
     }

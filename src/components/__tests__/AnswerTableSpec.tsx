@@ -28,8 +28,9 @@ describe('AnswerTable', () => {
 
   it('should initialize the state with selected as first option and correct answer as last', () => {
     expect(wrapper.state()).toEqual({
-      selected: AnswerValue.A,
-      correctAnswer: AnswerValue.D
+      selected: null,
+      correctAnswer: AnswerValue.D,
+      responseText: ''
     });
   });
 
@@ -45,9 +46,11 @@ describe('AnswerTable', () => {
       .prop('handleChange')(event);
     expect(wrapper.state()).toEqual({
       selected: AnswerValue.D,
-      correctAnswer: AnswerValue.D
+      correctAnswer: AnswerValue.D,
+      responseText: ''
     });
   });
+
   describe('Answer submission', () => {
     let event;
     beforeEach(() => {
@@ -80,6 +83,11 @@ describe('AnswerTable', () => {
       });
       it('should call the provided callback', () => {
         expect(callback).toHaveBeenCalled();
+      });
+      it('should reset the selected option to null', () => {
+        expect(wrapper.state()).toMatchObject({
+          selected: null
+        });
       });
     });
   });

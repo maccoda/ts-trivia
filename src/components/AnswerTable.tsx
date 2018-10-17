@@ -14,25 +14,29 @@ export enum AnswerValue {
   D
 }
 interface AnswerTableState {
-  selected: AnswerValue;
+  selected?: AnswerValue;
   correctAnswer: AnswerValue;
   responseText: string;
 }
 
 export default class AnswerTable extends React.Component<
   AnswerTableProps,
-  any
+  AnswerTableState
 > {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { selected: AnswerValue.A, correctAnswer: AnswerValue.D };
+    this.state = {
+      selected: null,
+      correctAnswer: AnswerValue.D,
+      responseText: ''
+    };
   }
   handleSubmit(event: any) {
     event.preventDefault();
     if (this.state.correctAnswer == this.state.selected) {
-      this.setState({ responseText: 'That was correct!' });
+      this.setState({ responseText: 'That was correct!', selected: null });
       this.props.correctCallback();
     } else {
       this.setState({ responseText: 'That was incorrect :(' });
