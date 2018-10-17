@@ -18,14 +18,22 @@ export default class App extends React.Component<AppProps, AppState> {
     super(props);
     this.next = this.next.bind(this);
   }
-  componentWillMount() {
+
+  fetchQuestions() {
     TriviaApi.get().then(x => {
       this.setState({ questions: x, currentIndex: 0 });
     });
   }
+  componentWillMount() {
+    this.fetchQuestions();
+  }
 
   next() {
-    this.setState({ currentIndex: this.state.currentIndex + 1 });
+    if (this.state.currentIndex < this.state.questions.length - 1) {
+      this.setState({ currentIndex: this.state.currentIndex + 1 });
+    } else {
+      this.fetchQuestions();
+    }
   }
 
   render(): JSX.Element {
