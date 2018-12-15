@@ -11,7 +11,7 @@ describe('AnswerTable', () => {
   let correct, incorrect, callback;
   beforeEach(() => {
     correct = 'correct';
-    incorrect = ['wrong', 'still wrong'];
+    incorrect = ['wrong', 'still wrong', 'wrong again'];
     callback = jest.fn();
     wrapper = shallow(
       <AnswerTable
