@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { ShallowWrapper, shallow, configure } from 'enzyme';
-import AnswerTable, { AnswerValue } from '../AnswerTable';
-import AnswerOption from '../AnswerOption';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-15';
+import * as React from 'react';
+import AnswerOption from '../AnswerOption';
+import AnswerTable, { AnswerValue } from '../AnswerTable';
 
 configure({ adapter: new Adapter() });
 

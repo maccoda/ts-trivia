@@ -63,24 +63,28 @@ export default class AnswerTable extends React.Component<
                   checked={this.state.selected}
                   handleChange={this.handleChange}
                 />
-                <AnswerOption
-                  text={this.props.incorrectAnswers[1]}
-                  name="B"
-                  checked={this.state.selected}
-                  handleChange={this.handleChange}
-                />
+                {this.props.incorrectAnswers[1] && (
+                  <AnswerOption
+                    text={this.props.incorrectAnswers[1]}
+                    name="B"
+                    checked={this.state.selected}
+                    handleChange={this.handleChange}
+                  />
+                )}
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-md">
               <div className="form-check form-check-inline">
-                <AnswerOption
-                  text={this.props.incorrectAnswers[2]}
-                  name="C"
-                  checked={this.state.selected}
-                  handleChange={this.handleChange}
-                />
+                {this.props.incorrectAnswers[2] && (
+                  <AnswerOption
+                    text={this.props.incorrectAnswers[2]}
+                    name="C"
+                    checked={this.state.selected}
+                    handleChange={this.handleChange}
+                  />
+                )}
                 <AnswerOption
                   text={this.props.correctAnswer}
                   name="D"

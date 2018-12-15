@@ -11,6 +11,7 @@ export interface AppProps {
 interface AppState {
   questions: Array<QuestionModel>;
   currentIndex: number;
+  loading: boolean;
 }
 
 export default class App extends React.Component<AppProps, AppState> {
@@ -20,8 +21,9 @@ export default class App extends React.Component<AppProps, AppState> {
   }
 
   fetchQuestions() {
+    this.setState({ loading: true });
     TriviaApi.get().then(x => {
-      this.setState({ questions: x, currentIndex: 0 });
+      this.setState({ questions: x, currentIndex: 0, loading: false });
     });
   }
   componentWillMount() {
@@ -37,10 +39,12 @@ export default class App extends React.Component<AppProps, AppState> {
   }
 
   render(): JSX.Element {
-    if (this.state == null) {
+    if (this.state.loading) {
       return (
         <div className="container">
-          <div className="loader" />
+          <div className="center">
+            <div className="loader" />
+          </div>
         </div>
       );
     }
