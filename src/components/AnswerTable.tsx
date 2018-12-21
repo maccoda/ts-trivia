@@ -1,10 +1,11 @@
 import * as React from 'react';
 import AnswerOption from './AnswerOption';
 import ResponseLabel from './ResponseLabel';
+import AnswerModel from '../model/AnswerModal';
 
 export interface AnswerTableProps {
-  correctAnswer: string;
-  incorrectAnswers: Array<string>;
+  answers: Array<AnswerModel>;
+  correctAnswer: AnswerValue;
   correctCallback(): void;
 }
 export enum AnswerValue {
@@ -15,7 +16,6 @@ export enum AnswerValue {
 }
 interface AnswerTableState {
   selected?: AnswerValue;
-  correctAnswer: AnswerValue;
   responseText: string;
 }
 
@@ -23,19 +23,19 @@ export default class AnswerTable extends React.Component<
   AnswerTableProps,
   AnswerTableState
 > {
-  constructor(props) {
+  constructor(props: AnswerTableProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       selected: null,
-      correctAnswer: AnswerValue.D,
       responseText: ''
     };
   }
+
   handleSubmit(event: any) {
     event.preventDefault();
-    if (this.state.correctAnswer == this.state.selected) {
+    if (this.props.correctAnswer == this.state.selected) {
       this.setState({ responseText: 'That was correct!', selected: null });
       this.props.correctCallback();
     } else {
@@ -51,49 +51,38 @@ export default class AnswerTable extends React.Component<
   }
 
   render() {
+    const answerOptions = this.props.answers.map((x, idx) => {
+      return (
+        <AnswerOption
+          text={x.text}
+          name={AnswerValue[idx]}
+          checked={this.state.selected}
+          handleChange={this.handleChange}
+        />
+      );
+    });
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
             <div className="col-md">
               <div className="form-check form-check-inline">
-                <AnswerOption
-                  text={this.props.incorrectAnswers[0]}
-                  name="A"
-                  checked={this.state.selected}
-                  handleChange={this.handleChange}
-                />
-                {this.props.incorrectAnswers[1] && (
-                  <AnswerOption
-                    text={this.props.incorrectAnswers[1]}
-                    name="B"
-                    checked={this.state.selected}
-                    handleChange={this.handleChange}
-                  />
-                )}
+                {answerOptions[0]}
+                {answerOptions[1]}
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md">
-              <div className="form-check form-check-inline">
-                {this.props.incorrectAnswers[2] && (
-                  <AnswerOption
-                    text={this.props.incorrectAnswers[2]}
-                    name="C"
-                    checked={this.state.selected}
-                    handleChange={this.handleChange}
-                  />
-                )}
-                <AnswerOption
-                  text={this.props.correctAnswer}
-                  name="D"
-                  checked={this.state.selected}
-                  handleChange={this.handleChange}
-                />
+          {answerOptions.length > 2 && (
+            <div className="row">
+              <div className="col-md">
+                <div className="form-check form-check-inline">
+                  {answerOptions[2]}
+                  {answerOptions[3]}
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <input type="submit" value="Submit" />
         </form>
         <ResponseLabel text={this.state.responseText} />

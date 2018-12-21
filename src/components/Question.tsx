@@ -1,10 +1,10 @@
 import * as React from 'react';
 import AnswerTable from './AnswerTable';
+import AnswerModel from '../model/AnswerModal';
 
 export interface QuestionProps {
   questionText: string;
-  correctOption: string;
-  incorrectOptions: Array<string>;
+  answers: Array<AnswerModel>;
   correctCallback(): void;
 }
 
@@ -20,9 +20,9 @@ export default class Question extends React.Component<QuestionProps, any> {
         <div className="row">
           <div className="col-md">
             <AnswerTable
-              correctAnswer={this.props.correctOption}
-              incorrectAnswers={this.props.incorrectOptions}
+              answers={this.props.answers}
               correctCallback={this.props.correctCallback}
+              correctAnswer={this.props.answers.findIndex(x => x.correct)}
             />
           </div>
         </div>

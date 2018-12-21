@@ -3,20 +3,26 @@ import * as Adapter from 'enzyme-adapter-react-15';
 import * as React from 'react';
 import AnswerOption from '../AnswerOption';
 import AnswerTable, { AnswerValue } from '../AnswerTable';
+import AnswerModel from '../../model/AnswerModal';
 
 configure({ adapter: new Adapter() });
 
 describe('AnswerTable', () => {
   let wrapper: ShallowWrapper<any, any>;
-  let correct, incorrect, callback;
+  let answers: Array<AnswerModel>;
+  let callback;
   beforeEach(() => {
-    correct = 'correct';
-    incorrect = ['wrong', 'still wrong', 'wrong again'];
+    answers = [
+      { text: 'correct', correct: true },
+      { text: 'wrong', correct: false },
+      { text: 'still wrong', correct: false },
+      { text: 'wrong again', correct: false }
+    ];
     callback = jest.fn();
     wrapper = shallow(
       <AnswerTable
-        correctAnswer={correct}
-        incorrectAnswers={incorrect}
+        correctAnswer={3}
+        answers={answers}
         correctCallback={callback}
       />
     );
@@ -29,7 +35,6 @@ describe('AnswerTable', () => {
   it('should initialize the state with selected as first option and correct answer as last', () => {
     expect(wrapper.state()).toEqual({
       selected: null,
-      correctAnswer: AnswerValue.D,
       responseText: ''
     });
   });
@@ -46,7 +51,6 @@ describe('AnswerTable', () => {
       .prop('handleChange')(event);
     expect(wrapper.state()).toEqual({
       selected: AnswerValue.D,
-      correctAnswer: AnswerValue.D,
       responseText: ''
     });
   });
@@ -71,7 +75,6 @@ describe('AnswerTable', () => {
     describe('correct choice', () => {
       beforeEach(() => {
         wrapper.setState({
-          correctAnswer: AnswerValue.D,
           selected: AnswerValue.D
         });
         wrapper.find('form').simulate('submit', event);

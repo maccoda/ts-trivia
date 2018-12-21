@@ -1,8 +1,6 @@
-export default class QuestionModel {
-  category: string;
-  correct_answer: string;
-  difficulty: string;
-  incorrect_answers: Array<string>;
-  question: string;
-  type: string;
+import AnswerModel from "./AnswerModal";
+
+export default interface QuestionModel {
+    questionText: string
+    answers: Array<AnswerModel>
 }

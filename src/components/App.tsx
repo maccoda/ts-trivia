@@ -2,7 +2,7 @@ import * as React from 'react';
 import Question from './Question';
 import TriviaApi from '../service/TriviaApi';
 import QuestionModel from '../model/QuestionModel';
-import HtmlCodeConverter from '../service/HtmlCodeConverter';
+import ConvertApiDataToModel from '../service/QuestionConverter';
 
 export interface AppProps {
   title: string;
@@ -23,7 +23,8 @@ export default class App extends React.Component<AppProps, AppState> {
   fetchQuestions() {
     this.setState({ loading: true });
     TriviaApi.get().then(x => {
-      this.setState({ questions: x, currentIndex: 0, loading: false });
+      const model = x.map(question => ConvertApiDataToModel(question));
+      this.setState({ questions: model, currentIndex: 0, loading: false });
     });
   }
   componentWillMount() {
@@ -49,21 +50,13 @@ export default class App extends React.Component<AppProps, AppState> {
       );
     }
     const currQuestion = this.state.questions[this.state.currentIndex];
-    const text = HtmlCodeConverter.convertFromHtml(currQuestion.question);
-    const correct = HtmlCodeConverter.convertFromHtml(
-      currQuestion.correct_answer
-    );
-    const incorrect = currQuestion.incorrect_answers.map(x =>
-      HtmlCodeConverter.convertFromHtml(x)
-    );
     return (
       <div className="container">
         <h1>{this.props.title}</h1>
         <div className="question">
           <Question
-            questionText={text}
-            correctOption={correct}
-            incorrectOptions={incorrect}
+            questionText={currQuestion.questionText}
+            answers={currQuestion.answers}
             correctCallback={this.next}
           />
         </div>

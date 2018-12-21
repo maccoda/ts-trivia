@@ -3,7 +3,7 @@ import { shallow, ShallowWrapper, configure } from 'enzyme';
 import App from '../App';
 import * as Adapter from 'enzyme-adapter-react-15';
 import TriviaApi from '../../service/TriviaApi';
-import QuestionModel from '../../model/QuestionModel';
+import TriviaApiQuestion from '../../model/TriviaApiQuestion';
 import Question from '../Question';
 
 configure({ adapter: new Adapter() });
@@ -12,9 +12,10 @@ let app: ShallowWrapper<undefined, undefined>;
 describe('Basic application testing', async () => {
   let questions, api;
   beforeEach(() => {
-    const question = new QuestionModel();
-    question.question = 'aaa';
-    question.incorrect_answers = ['bad', 'worse'];
+    const question: Partial<TriviaApiQuestion> = {
+      question: 'aaa',
+      incorrect_answers: ['bad', 'worse']
+    };
     questions = [question, question];
     const promise = Promise.resolve(questions);
     api = jest.spyOn(TriviaApi, 'get').mockReturnValue(promise);
