@@ -1,14 +1,15 @@
-import TriviaApiQuestion from "../model/TriviaApiQuestion";
-import QuestionModel from "../model/QuestionModel";
-import HtmlCodeConverter from "./HtmlCodeConverter";
-import AnswerModel from "../model/AnswerModal";
+import AnswerModel from '../model/AnswerModal'
+import QuestionModel from '../model/QuestionModel'
+import TriviaApiQuestion from '../model/TriviaApiQuestion'
+import HtmlCodeConverter from './HtmlCodeConverter'
 
 const ConvertApiDataToModel = (apiModel: TriviaApiQuestion): QuestionModel => {
-    const answers: Array<AnswerModel> = apiModel.incorrect_answers.map(x => {return {text: HtmlCodeConverter.convertFromHtml(x), correct: false}})
+    const answers: AnswerModel[] = apiModel.incorrect_answers
+        .map((x) => ({text: HtmlCodeConverter.convertFromHtml(x), correct: false}))
     answers.push({text: HtmlCodeConverter.convertFromHtml(apiModel.correct_answer), correct: true})
     return {
+        answers,
         questionText: HtmlCodeConverter.convertFromHtml(apiModel.question),
-        answers: answers
     }
-};
-export default ConvertApiDataToModel;
+}
+export default ConvertApiDataToModel
