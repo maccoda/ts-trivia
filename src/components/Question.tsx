@@ -1,5 +1,6 @@
 import * as React from 'react'
 import AnswerModel from '../model/AnswerModal'
+import { shuffle } from '../service/ShuffleArray'
 import AnswerTable from './AnswerTable'
 
 export interface QuestionProps {
@@ -10,6 +11,7 @@ export interface QuestionProps {
 
 export default class Question extends React.Component<QuestionProps, any> {
   public render() {
+    const shuffledArray = shuffle(this.props.answers)
     return (
       <div>
         <div className='row'>
@@ -20,9 +22,9 @@ export default class Question extends React.Component<QuestionProps, any> {
         <div className='row'>
           <div className='col-md'>
             <AnswerTable
-              answers={this.props.answers}
+              answers={shuffledArray}
               correctCallback={this.props.correctCallback}
-              correctAnswer={this.props.answers.findIndex((x) => x.correct)}
+              correctAnswer={shuffledArray.findIndex((x) => x.correct)}
             />
           </div>
         </div>
