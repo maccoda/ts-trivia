@@ -34,8 +34,9 @@ describe('AnswerTable', () => {
 
   it('should initialize the state with selected as first option and correct answer as last', () => {
     expect(wrapper.state()).toEqual({
-      selected: null,
+      buttonText: 0,
       responseText: '',
+      selected: null,
     })
   })
 
@@ -49,9 +50,9 @@ describe('AnswerTable', () => {
       .find(AnswerOption)
       .first()
       .prop('handleChange')(event)
-    expect(wrapper.state()).toEqual({
-      selected: AnswerValue.D,
+    expect(wrapper.state()).toMatchObject({
       responseText: '',
+      selected: AnswerValue.D,
     })
   })
 
@@ -75,6 +76,7 @@ describe('AnswerTable', () => {
     describe('correct choice', () => {
       beforeEach(() => {
         wrapper.setState({
+          buttonText: 0,
           selected: AnswerValue.D,
         })
         wrapper.find('form').simulate('submit', event)
@@ -84,7 +86,10 @@ describe('AnswerTable', () => {
           responseText: 'That was correct!',
         })
       })
-      it('should call the provided callback', () => {
+      it('should call the provided callback once the next button is shown', () => {
+        wrapper.setState({ buttonText: 1 })
+        wrapper.find('form').simulate('submit', event)
+
         expect(callback).toHaveBeenCalled()
       })
       it('should reset the selected option to null', () => {

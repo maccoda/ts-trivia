@@ -14,9 +14,15 @@ export enum AnswerValue {
   C,
   D,
 }
+
+enum ButtonText {
+  'Submit',
+  'Next',
+}
 interface AnswerTableState {
   selected?: AnswerValue
   responseText: string
+  buttonText: ButtonText
 }
 
 export default class AnswerTable extends React.Component<
@@ -28,6 +34,7 @@ export default class AnswerTable extends React.Component<
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {
+      buttonText: ButtonText.Submit,
       responseText: '',
       selected: null,
     }
@@ -35,9 +42,15 @@ export default class AnswerTable extends React.Component<
 
   public handleSubmit(event: any) {
     event.preventDefault()
-    if (this.props.correctAnswer === this.state.selected) {
-      this.setState({ responseText: 'That was correct!', selected: null })
+    if (this.state.buttonText === ButtonText.Next) {
+      this.setState({ responseText: '', buttonText: ButtonText.Submit })
       this.props.correctCallback()
+    } else if (this.props.correctAnswer === this.state.selected) {
+      this.setState({
+        buttonText: ButtonText.Next,
+        responseText: 'That was correct!',
+        selected: null,
+      })
     } else {
       this.setState({ responseText: 'That was incorrect :(' })
     }
@@ -84,7 +97,7 @@ export default class AnswerTable extends React.Component<
               </div>
             </div>
           )}
-          <input type='submit' value='Submit' />
+          <input type='submit' value={ButtonText[this.state.buttonText]} />
         </form>
         <ResponseLabel text={this.state.responseText} />
       </div>
