@@ -7,5 +7,5 @@
     "outDir": "dist",
     "lib": ["es2015", "dom", "scripthost"]
   },
-  "exclude": ["node_modules", "static", "**/*Spec.ts*"]
+  "exclude": ["node_modules", "static", "**/*.test.ts*"]
 }
