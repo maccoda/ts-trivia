@@ -1,5 +1,5 @@
-import ConvertApiDataToModel from "../QuestionConverter";
-import QuestionModel from "../../model/QuestionModel";
+import QuestionModel from '../../model/QuestionModel'
+import ConvertApiDataToModel from '../QuestionConverter'
 
 describe('QuestionConverter', () => {
   const exampleResponse = {
@@ -12,7 +12,7 @@ describe('QuestionConverter', () => {
         question:
           'Spain was formed in 1469 with the marriage of Isabella I of Castile and Ferdinand II of what other Iberian kingdom?',
         correct_answer: 'Aragon',
-        incorrect_answers: ['Galicia', 'Le&oacute;n', 'Navarre']
+        incorrect_answers: ['Galicia', 'Le&oacute;n', 'Navarre'],
       },
       {
         category: 'Entertainment: Video Games',
@@ -21,7 +21,7 @@ describe('QuestionConverter', () => {
         question:
           'In World of Warcraft Lore, four Old Gods created a giant and powerful creature. What was it called? ',
         correct_answer: 'The Ancient One',
-        incorrect_answers: ['Anomalous', 'Eater of Souls', 'The Lich King']
+        incorrect_answers: ['Anomalous', 'Eater of Souls', 'The Lich King'],
       },
       {
         category: 'General Knowledge',
@@ -29,7 +29,7 @@ describe('QuestionConverter', () => {
         difficulty: 'easy',
         question: 'What is the nickname of the US state of California?',
         correct_answer: 'Golden State',
-        incorrect_answers: ['Sunshine State', 'Bay State', 'Treasure State']
+        incorrect_answers: ['Sunshine State', 'Bay State', 'Treasure State'],
       },
       {
         category: 'Entertainment: Musicals & Theatres',
@@ -38,7 +38,7 @@ describe('QuestionConverter', () => {
         question:
           'What is the name of Broadway&#039;s first &quot;long-run&quot; musical?',
         correct_answer: 'The Elves',
-        incorrect_answers: ['Wicked', 'Hamilton', 'The Book of Mormon']
+        incorrect_answers: ['Wicked', 'Hamilton', 'The Book of Mormon'],
       },
       {
         category: 'Entertainment: Video Games',
@@ -47,7 +47,7 @@ describe('QuestionConverter', () => {
         question:
           'The starting pistol of the Terrorist team in a competitive match of Counter Strike: Global Offensive is what?',
         correct_answer: 'Glock-18',
-        incorrect_answers: ['Tec-9', 'Desert Eagle', 'Dual Berretas']
+        incorrect_answers: ['Tec-9', 'Desert Eagle', 'Dual Berretas'],
       },
       {
         category: 'Entertainment: Books',
@@ -56,7 +56,7 @@ describe('QuestionConverter', () => {
         question:
           'In the year 1818, novelist Mary Shelly is credited with writing a fiction novel and creating this infamous character.',
         correct_answer: 'Frankenstein&#039;s monster',
-        incorrect_answers: ['Dracula', 'The Thing', 'The Invisible Man']
+        incorrect_answers: ['Dracula', 'The Thing', 'The Invisible Man'],
       },
       {
         category: 'History',
@@ -68,8 +68,8 @@ describe('QuestionConverter', () => {
         incorrect_answers: [
           'Constantine IV',
           'Arcadius',
-          'Theodosius the Great'
-        ]
+          'Theodosius the Great',
+        ],
       },
       {
         category: 'Entertainment: Television',
@@ -77,7 +77,7 @@ describe('QuestionConverter', () => {
         difficulty: 'hard',
         question: 'What is the Klingon&#039;s afterlife called?',
         correct_answer: 'Sto-vo-kor',
-        incorrect_answers: ['Valhalla', 'Karon&#039;gahk', 'New Jersey']
+        incorrect_answers: ['Valhalla', 'Karon&#039;gahk', 'New Jersey'],
       },
       {
         category: 'Entertainment: Board Games',
@@ -86,7 +86,7 @@ describe('QuestionConverter', () => {
         question:
           '&quot;Rich Uncle Pennybags&quot; from the board game &quot;Monopoly&quot; wears a monocle.',
         correct_answer: 'False',
-        incorrect_answers: ['True']
+        incorrect_answers: ['True'],
       },
       {
         category: 'Entertainment: Board Games',
@@ -95,10 +95,10 @@ describe('QuestionConverter', () => {
         question:
           'In &quot;Magic: The Gathering&quot;, during the design for Planar Chaos, what color did the developers think of adding in as the sixth color?',
         correct_answer: 'Purple',
-        incorrect_answers: ['Brown', 'Pink', 'Orange']
-      }
-    ]
-  };
+        incorrect_answers: ['Brown', 'Pink', 'Orange'],
+      },
+    ],
+  }
   it('should convert API response into question model', () => {
     const input = {
       category: 'Entertainment: Board Games',
@@ -107,8 +107,8 @@ describe('QuestionConverter', () => {
       question:
         'In &quot;Magic: The Gathering&quot;, during the design for Planar Chaos, what color did the developers think of adding in as the sixth color?',
       correct_answer: 'Purple',
-      incorrect_answers: ['Brown', 'Pink', 'Orange']
-    };
+      incorrect_answers: ['Brown', 'Pink', 'Orange'],
+    }
     const actual = ConvertApiDataToModel(input)
 
     const expected: QuestionModel = {
@@ -116,22 +116,22 @@ describe('QuestionConverter', () => {
         answers: [
             {
                 text: 'Brown',
-                correct: false
+                correct: false,
             },
             {
                 text: 'Pink',
-                correct: false
+                correct: false,
             },
             {
                 text: 'Orange',
-                correct: false
+                correct: false,
             },
             {
                 text: 'Purple',
-                correct: true
-            }
-        ]
+                correct: true,
+            },
+        ],
     }
     expect(actual).toMatchObject(expected)
-  });
-});
+  })
+})
