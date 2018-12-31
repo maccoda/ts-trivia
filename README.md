@@ -12,7 +12,7 @@ environment of tests and state management as well.
 - [ ] Change some styling when the answer is correct
 - [X] ~~Manage when all 10 questions have been answered~~
 - [ ] Count and show how many answers were correct
-- [ ] Count and show the number of questions
+- [X] ~~Count and show the number of questions~~
 - [X] ~~Randomize the placement of the answer~~
 - [X] ~~Handle when there are only two answer options (true or false)~~
 

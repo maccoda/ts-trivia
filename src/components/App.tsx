@@ -1,23 +1,30 @@
-import * as React from 'react'
-import QuestionModel from '../model/QuestionModel'
-import ConvertApiDataToModel from '../service/QuestionConverter'
-import TriviaApi from '../service/TriviaApi'
-import Question from './Question'
+import * as React from 'react';
+import QuestionModel from '../model/QuestionModel';
+import ConvertApiDataToModel from '../service/QuestionConverter';
+import TriviaApi from '../service/TriviaApi';
+import Question from './Question';
 
 export interface AppProps {
-  title: string
+  title: string;
 }
 
 interface AppState {
-  questions: QuestionModel[]
+  questions: QuestionModel[];
   currentIndex: number
-  loading: boolean
+  loading: boolean;
+  questionsAnswered: number
 }
 
 export default class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props)
     this.next = this.next.bind(this)
+    this.state = {
+      currentIndex: 0,
+      loading: false,
+      questions: [],
+      questionsAnswered: 0
+    }
   }
 
   public fetchQuestions() {
@@ -37,6 +44,7 @@ export default class App extends React.Component<AppProps, AppState> {
     } else {
       this.fetchQuestions()
     }
+    this.setState({ questionsAnswered: this.state.questionsAnswered + 1 })
   }
 
   public render(): JSX.Element {
@@ -52,13 +60,22 @@ export default class App extends React.Component<AppProps, AppState> {
     const currQuestion = this.state.questions[this.state.currentIndex]
     return (
       <div className='container'>
-        <h1>{this.props.title}</h1>
-        <div className='question'>
-          <Question
-            questionText={currQuestion.questionText}
-            answers={currQuestion.answers}
-            correctCallback={this.next}
-          />
+        <div className='row'>
+          <div className='col-md'>
+            <h1>{this.props.title}</h1>
+          </div>
+        </div>
+        <div className='row'>
+          Questions answered: {this.state.questionsAnswered}
+        </div>
+        <div className='row'>
+          <div className='col-md question'>
+            <Question
+              questionText={currQuestion.questionText}
+              answers={currQuestion.answers}
+              correctCallback={this.next}
+            />
+          </div>
         </div>
       </div>
     )
