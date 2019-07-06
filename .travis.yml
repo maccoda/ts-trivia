@@ -1,4 +1,14 @@
 language: node_js
 node_js:
   - 'node'
-script: ./ci.sh
+script:
+  - ./ci.sh
+  - npm run build --release
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: build
+  on:
+    branch: master
