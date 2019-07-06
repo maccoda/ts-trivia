@@ -2,6 +2,8 @@
 
 ![build](https://travis-ci.org/maccoda/ts-trivia.svg?branch=master)
 
+[Have a look](https://maccoda.github.io/ts-trivia/)
+
 Basic trivia web application to mainly provide a foundation for working with
 Typescript and React. In particular ensuring able to set up the entire
 environment of tests and state management as well.

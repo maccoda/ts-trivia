@@ -55,5 +55,6 @@
       "node"
     ],
     "mapCoverage": true
-  }
+  },
+  "homepage": "https://maccoda.github.io/ts-trivia/"
 }
