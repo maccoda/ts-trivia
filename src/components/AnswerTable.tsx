@@ -15,7 +15,7 @@ export enum AnswerValue {
   D,
 }
 
-type AnswerValueStrings = keyof typeof AnswerValue
+type AnswerValueStrings = keyof typeof AnswerValue;
 
 enum ButtonText {
   'Submit',
