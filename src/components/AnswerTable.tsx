@@ -15,12 +15,14 @@ export enum AnswerValue {
   D,
 }
 
+type AnswerValueStrings = keyof typeof AnswerValue;
+
 enum ButtonText {
   'Submit',
   'Next',
 }
 interface AnswerTableState {
-  selected?: AnswerValue
+  selected: AnswerValue | null
   responseText: string
   buttonText: ButtonText
 }
@@ -56,8 +58,8 @@ export default class AnswerTable extends React.Component<
     }
   }
 
-  public handleChange(event: any): void {
-    const name: string = event.target.name
+  public handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    const name: AnswerValueStrings = event.target.name as AnswerValueStrings
     const value: AnswerValue = AnswerValue[name]
 
     this.setState({ selected: value })

@@ -16,7 +16,7 @@ interface AppState {
 }
 
 export default class App extends React.Component<AppProps, AppState> {
-  constructor(props) {
+  constructor(props: AppProps) {
     super(props)
     this.next = this.next.bind(this)
     this.state = {

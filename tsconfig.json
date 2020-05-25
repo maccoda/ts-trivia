@@ -5,7 +5,29 @@
     "experimentalDecorators": true,
     "jsx": "react",
     "outDir": "dist",
-    "lib": ["es2015", "dom", "scripthost"]
+    "lib": [
+      "es2015",
+      "dom",
+      "scripthost"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "exclude": ["node_modules", "static", "**/*.test.ts*"]
+  "exclude": [
+    "node_modules",
+    "static",
+    "**/*.test.ts*"
+  ],
+  "include": [
+    "src"
+  ]
 }
