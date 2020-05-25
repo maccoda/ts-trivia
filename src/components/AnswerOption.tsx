@@ -19,7 +19,7 @@ export default class AnswerOption extends React.Component<
             type='radio'
             name={this.props.name}
             onChange={this.props.handleChange}
-            checked={this.props.checked ? this.props.name === AnswerValue[this.props.checked]: false}
+            checked={this.props.checked ? this.props.name === AnswerValue[this.props.checked] : false}
           />
           {this.props.text}
         </label>

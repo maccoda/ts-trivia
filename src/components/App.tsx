@@ -1,17 +1,17 @@
-import * as React from 'react';
-import QuestionModel from '../model/QuestionModel';
-import ConvertApiDataToModel from '../service/QuestionConverter';
-import TriviaApi from '../service/TriviaApi';
-import Question from './Question';
+import * as React from 'react'
+import QuestionModel from '../model/QuestionModel'
+import ConvertApiDataToModel from '../service/QuestionConverter'
+import TriviaApi from '../service/TriviaApi'
+import Question from './Question'
 
 export interface AppProps {
-  title: string;
+  title: string
 }
 
 interface AppState {
-  questions: QuestionModel[];
+  questions: QuestionModel[]
   currentIndex: number
-  loading: boolean;
+  loading: boolean
   questionsAnswered: number
 }
 
@@ -23,7 +23,7 @@ export default class App extends React.Component<AppProps, AppState> {
       currentIndex: 0,
       loading: false,
       questions: [],
-      questionsAnswered: 0
+      questionsAnswered: 0,
     }
   }
 
